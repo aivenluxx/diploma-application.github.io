@@ -1,0 +1,52 @@
+.dashboard-container {
+  position: relative;
+  width: 400px; 
+  height: 400px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0e0e38; 
+}
+
+.dashboard-image {
+  position: absolute;
+  width: 100%;
+  height: auto;
+}
+
+.start-button {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.unit-buttons, .speed-units {
+  position: absolute;
+}
+
+.unit-buttons {
+  top: 20px;
+  left: 20px;
+}
+
+.speed-units {
+  top: 80px;
+  right: 20px;
+}
+
+.unit-button {
+  margin: 5px;
+  padding: 5px 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

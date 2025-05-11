@@ -1,7 +1,13 @@
+import Background from "./components/Background";
+import Dashboard from "./components/Dashboard";
+import SidePanel from "./components/SidePanel";
+
 function App() {
   return (
     <div className="App">
-      <header> Hello World! </header>
+      <SidePanel/>
+      <Background/>
+      <Dashboard/>
     </div>
   );
 }
