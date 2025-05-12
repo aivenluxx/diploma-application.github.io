@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/Background.css';
+import '../../styles/MainPage/Background.css';
 
 const Background = ({ children }) => {
   return <div className="background">{children}</div>;

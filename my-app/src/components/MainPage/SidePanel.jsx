@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaHome, FaClipboardList, FaUserCheck } from 'react-icons/fa';
 import { IoSpeedometerOutline } from "react-icons/io5";
-import '../styles/SidePanel.css'; 
+import '../../styles/MainPage/SidePanel.css'; 
 
 const SidePanel = () => {
   return (
