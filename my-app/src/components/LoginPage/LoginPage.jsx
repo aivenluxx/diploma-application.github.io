@@ -2,6 +2,7 @@ import React from "react";
 import "../../styles/LoginPage/LoginPage.css";
 import { IoSpeedometerOutline } from "react-icons/io5";
 import { Meta } from 'react-head';
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
   return (
@@ -19,8 +20,8 @@ const LoginForm = () => {
         <input type="password" className="login-input" />
 
         <div className="login-links">
-          <a href="#">Not registered?</a>
-          <a href="#">Forgot password?</a>
+          <Link to = "/register">Not registered?</Link>
+          <Link to = "/passwordrenewal">Forgot password?</Link>
         </div>
 
         <button className="login-button">Login</button>
