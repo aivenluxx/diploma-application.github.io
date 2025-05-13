@@ -1,0 +1,82 @@
+/* MainPageLayout.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* Prevent scrollbars on the main viewport */
+}
+
+.main-page-container {
+  display: flex;
+  height: 100vh; /* Ensure the container takes full viewport height */
+  overflow: hidden; /* Prevent scrollbars on the container */
+  justify-content: flex-end; /* Push the background to the right */
+  align-items: center; /* Vertically center the background (and its content) */
+}
+
+.side-panel {
+  position: fixed; /* Keep the side panel fixed during scrolling */
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 240px;
+  background-color: #2d216b;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  font-family: 'Raleway', sans-serif;
+  box-sizing: border-box;
+  z-index: 10; /* Ensure it's above other content if needed */
+  overflow-y: auto; /* Allow scrolling within the side panel if its content overflows */
+}
+
+.side-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+  font-size: 35px;
+  font-weight: 600;
+}
+
+.side-panel-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.side-panel-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: color 0.2s ease;
+  text-decoration: none; /* Remove default link styling */
+}
+
+.side-panel-nav-item:hover {
+  color: #ccc;
+}
+
+.side-panel-icon {
+  color: white;
+  font-size: 24px;
+}
+
+.background {
+  height: 100vh;
+  background-color: #050a30;
+  color: white;
+  box-sizing: border-box;
+  display: flex; /* Enable flexbox for centering */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  overflow: hidden; /* Prevent scrollbars on the background */
+  flex-grow: 1; /* Allow the background to take up the remaining width */
+}

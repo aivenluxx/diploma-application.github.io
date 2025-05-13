@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap');
+
+/* Добавьте это в HTML в секцию <head> для правильного масштабирования на мобильных устройствах */
+/* <meta name="viewport" content="width=device-width, initial-scale=1.0"> */
+
+.registration-background {
+    background-color: #030532;
+    min-height: 100vh; /* Используйте min-height вместо height, чтобы контент не обрезался */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Добавьте отступы для очень маленьких экранов, чтобы форма не прилипала к краям */
+    box-sizing: border-box; /* Убедитесь, что padding не увеличивает общий размер */
+}
+
+.registration-container {
+    background-color: #2e236b;
+    border-radius: 20px;
+    padding: 40px;
+    width: 90%; /* Используйте процентную ширину для адаптивности */
+    max-width: 420px; /* Ограничьте максимальную ширину, чтобы форма не была слишком широкой на больших экранах */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box; /* Важно для корректного расчета ширины с учетом padding */
+}
+
+.registration-title {
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.registration-label {
+    color: white;
+    margin-top: 10px;
+    display: block;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+}
+
+.registration-input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    /* margin-left: -12px; Удалите этот хак, так как padding контейнера и box-sizing решают проблему */
+    border: none;
+    border-radius: 8px;
+    background-color: #f1f5f9;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    box-sizing: border-box; /* Гарантирует, что padding и border включены в total width */
+}
+
+.registration-button {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 25px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-sizing: border-box; /* Для консистентного поведения padding */
+}
+
+.registration-button:hover {
+    background-color: #ddd;
+}
+
+/* Медиа-запросы для адаптации на маленьких экранах */
+@media (max-width: 480px) { /* Пример точки остановки для маленьких телефонов */
+    .registration-container {
+        padding: 20px; /* Уменьшите внутренние отступы на маленьких экранах */
+    }
+
+    .registration-title {
+        font-size: 24px; /* Немного уменьшите размер заголовка */
+        margin-bottom: 20px;
+    }
+
+    .registration-input,
+    .registration-button {
+        padding: 10px; /* Немного уменьшите padding для полей ввода и кнопок */
+    }
+}

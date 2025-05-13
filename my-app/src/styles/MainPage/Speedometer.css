@@ -1,190 +1,196 @@
-/* Общие стили */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap');
+
 body,
 html {
- height: 100%;
- margin: 0;
- background-color: #0a043c;
- color: #fff;
+  height: 100%;
+  margin: 0;
+  background-color: #0a043c;
+  color: #fff;
 }
-
 
 .app-container {
- display: flex;
- height: 100vh;
+  display: flex;
+  height: 100vh;
 }
 
-
-/* Стили боковой панели */
 .sidebar {
- width: 200px;
- background-color: #341968;
- padding: 20px;
- color: #fff;
+  width: 200px;
+  background-color: #341968;
+  padding: 20px;
+  color: #fff;
 }
-
 
 .sidebar ul {
- list-style-type: none;
- padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
-
 
 .sidebar li a {
- color: #fff;
- text-decoration: none;
- display: block;
- padding: 10px 0;
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 10px 0;
 }
 
-
-/* Стили основного контента */
 .content {
- flex: 1;
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: flex-start;
- padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
-
 
 .content header {
- margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
+/* Стили кнопок переключения (Analog/Digital) */
+.toggle-buttons {
+  display: flex;
+  justify-content: center; /* Центрировать кнопку */
+  margin-bottom: 20px; /* Отступ снизу от кнопки */
+}
 
-/* Стили секции спидометра */
+.toggle-buttons button {
+  margin: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  background-color: #5a3a99;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  align-self: center; /* Центрировать кнопку */
+  font-family: 'Raleway', sans-serif;
+}
+
+/* Изменения для центрирования блока спидометра */
 .speedometer-section {
- display: flex;
- flex-direction: column;
- align-items: center;
- width: 100%; /* Ensure it takes full width */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Центрировать по горизонтали */
+  justify-content: center; /* Центрировать по вертикали */
+  width: 100%;
+  height: 100%;
+  gap: 30px; /* Отступ между элементами секции */
 }
 
-
-/* Центрируйте весь спидометр по отношению к заголовку */
 .speedometer-container {
- display: flex;
- flex-direction: row;
- align-items: center;
- justify-content: flex-start; /* Align to the start */
- margin-bottom: 20px;
+  display: flex;
+  flex-direction: column; /* Размещаем спидометр и кнопки единиц измерения вертикально */
+  align-items: center; /* Центрировать по горизонтали */
+  gap: 20px; /* Расстояние между спидометром и кнопками единиц */
 }
 
+/* Контейнер для спидометра и кнопок единиц измерения */
+.speedometer-unit-wrapper {
+  display: flex;
+  align-items: center; /* Центрировать по вертикали */
+  gap: 40px; /* Расстояние между спидометром и кнопками единиц */
+}
 
 /* Стили дисплея спидометра */
 .speedometer-display {
- width: 200px;
- height: 200px;
- margin-right: 20px;
- display: flex;
- justify-content: center;
- align-items: center;
- border-radius: 50%;
- overflow: hidden;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #444; /* Пример */
+  color: #fff; /* Пример */
+  font-size: 24px; /* Пример */
 }
 
+.speedometer-display img {
+  max-width: 100%; /* Уменьшите изображение до 80% от ширины контейнера */
+  max-height: 100%; /* Уменьшите изображение до 80% от высоты контейнера */
+  object-fit: contain; /* Сохраняет пропорции изображения и помещает его внутрь контейнера */
+}
 
 .analog-speedometer {
- position: relative;
- width: 100%;
- height: 100%;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-
-
-.analog-speedometer img {
- width: 100%;
- height: 100%;
- object-fit: cover;
-}
-
 
 .speedometer-needle {
- position: absolute;
- top: 50%;
- left: 50%;
- width: 50%;
- height: 2px;
- background-color: red;
- transform-origin: 0% 50%;
- transform: translateX(-50%) rotate(0deg);
+  position: absolute;
+  top: 50%;
+  left: 8%; /* Помещаем центр стрелки в центр */
+  width: 42%;
+  height: 2px;
+  background-color: red;
+  transform-origin: 120% 50%; /* Вращение вокруг правого края */
+  transform: rotate(180deg); /* Начальный поворот на 180 градусов */
+  transform: rotate(calc(180deg + 0deg)); /* Для динамического управления углом */
 }
-
 
 .digital-speedometer p {
- font-size: 20px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
 }
 
-
-/* Стили кнопок переключения */
-.toggle-buttons button {
- margin: 5px;
- padding: 8px 12px;
- cursor: pointer;
- background-color: #5a3a99;
- color: white;
- border: none;
- border-radius: 5px;
- align-self: flex-start; /* Align to the start */
+/* Контейнер для кнопок выбора единиц измерения */
+.unit-selector-container {
+  display: flex;
+  justify-content: center; /* Центрировать по горизонтали внутри контейнера */
 }
-
 
 /* Стили селектора юнитов */
 .unit-selector {
- display: flex;
- flex-direction: column;
- align-items: flex-start; /* Align items to the start */
+  display: flex;
+  flex-direction: column; /* Разместить кнопки вертикально */
+  gap: 5px; /* Отступ между кнопками */
 }
-
 
 .unit-selector button {
- margin: 5px;
- padding: 8px 12px;
- cursor: pointer;
- background-color: #5a3a99;
- color: white;
- border: none;
- border-radius: 5px;
+  margin: 0;
+  padding: 8px 12px;
+  cursor: pointer;
+  background-color: #5a3a99;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Raleway', sans-serif;
 }
-
 
 /* Стили управления скоростью */
 .speed-controls {
- display: flex;
- align-items: flex-start; /* Align to the start */
- justify-content: center;
- margin-top: 10px;
- flex-direction: column; /* Stack the items vertically */
+  display: flex;
+  flex-direction: column; /* Стекать элементы вертикально */
+  align-items: center; /* Центрировать по горизонтали */
+  gap: 10px;
+  margin-top: 30px; /* Увеличим отступ сверху */
+  font-family: 'Raleway', sans-serif;
 }
-
 
 /* Стили кнопок управления скоростью */
 .speed-control-buttons {
- display: flex;
- margin-right: 0; /* Remove right margin */
- align-self: center; /* Center the buttons */
+  display: flex;
+  gap: 10px;
 }
-
 
 .speed-control-buttons button {
- margin: 5px;
- padding: 8px 12px;
- cursor: pointer;
- background-color: #5a3a99;
- color: white;
- border: none;
- border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  background-color: #5a3a99;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Raleway', sans-serif;
 }
-
 
 /* Стили кнопки «Старт» */
 .start-button {
- padding: 10px 20px;
- font-size: 16px;
- background-color: #5a3a99;
- color: white;
- border: none;
- border-radius: 5px;
- cursor: pointer;
- align-self: center; /* Center the button */
+  padding: 10px 20px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  background-color: #5a3a99;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }

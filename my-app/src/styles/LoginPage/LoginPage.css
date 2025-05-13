@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap');
+
+
+.login-background {
+    background-color: #030532;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box; 
+}
+
+.login-container {
+    background-color: #2e236b;
+    border-radius: 20px;
+    padding: 40px;
+    width: 90%; 
+    max-width: 400px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box; 
+}
+
+.login-title {
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-label {
+    color: white;
+    margin-top: 10px;
+    display: block;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+}
+
+.login-input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    margin-left: 0; 
+    margin-right: 0; 
+    border: none;
+    border-radius: 8px;
+    background-color: #f1f5f9;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    box-sizing: border-box; 
+}
+
+.login-links {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.login-links a {
+    color: #ffffff;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.login-links a:hover {
+    text-decoration: underline;
+}
+
+.login-button {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Raleway', sans-serif;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 25px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-sizing: border-box; 
+}
+
+.login-button:hover {
+    background-color: #ddd;
+}
+
+
+@media (max-width: 440px) { 
+    .login-container {
+        padding: 20px; 
+    }
+
+    .login-title {
+        font-size: 24px; 
+        margin-bottom: 20px;
+    }
+
+    .login-input,
+    .login-button {
+        padding: 10px; 
+    }
+
+    
+    .login-links a {
+        font-size: 13px;
+    }
+}
