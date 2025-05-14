@@ -21,7 +21,7 @@ const LoginForm = () => {
 
         <div className="login-links">
           <Link to = "/register">Not registered?</Link>
-          <Link to = "/passwordrenewal">Forgot password?</Link>
+          <Link to = "/passwordrecovery">Forgot password?</Link>
         </div>
 
         <button className="login-button">Login</button>

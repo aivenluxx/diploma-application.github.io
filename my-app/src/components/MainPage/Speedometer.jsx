@@ -18,7 +18,7 @@ const Speedometer = () => {
   };
 
   const accelerate = () => {
-    setSpeed((prevSpeed) => Math.min(prevSpeed + 10, 280));
+    setSpeed((prevSpeed) => Math.min(prevSpeed + 10, 330));
   };
 
   const decelerate = () => {

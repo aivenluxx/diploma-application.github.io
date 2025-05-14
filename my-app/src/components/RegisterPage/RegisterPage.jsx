@@ -2,8 +2,15 @@ import React from 'react';
 import '../../styles/RegisterPage/RegisterPage.css';
 import { IoSpeedometerOutline } from "react-icons/io5";
 import { Meta } from 'react-head';
+import { useNavigate } from 'react-router-dom';
 
-const RegisterPage = () => {
+const RegisterPage= () => {
+  const navigate = useNavigate();
+
+  const handleConfirmLetter = () => {
+    navigate('/emailconfirmationletter');
+  };
+
   return (
     <>
       <Meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,7 +36,7 @@ const RegisterPage = () => {
           <label className="registration-label">Repeat password</label>
           <input type="password" className="registration-input" />
 
-          <button className="registration-button">Complete registration</button>
+          <button className="registration-button" onClick={handleConfirmLetter}>Complete registration</button>
         </div>
       </div>
     </>

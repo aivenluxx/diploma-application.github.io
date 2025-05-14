@@ -123,9 +123,9 @@ html {
   width: 42%;
   height: 2px;
   background-color: red;
-  transform-origin: 120% 50%; /* Вращение вокруг правого края */
-  transform: rotate(180deg); /* Начальный поворот на 180 градусов */
-  transform: rotate(calc(180deg + 0deg)); /* Для динамического управления углом */
+  transform-origin: 100% 50%; /* Вращение вокруг правого края */
+  transform: rotate(280deg); /* Начальный поворот на 180 градусов */
+  transform: rotate(calc(280deg + 0deg)); /* Для динамического управления углом */
 }
 
 .digital-speedometer p {

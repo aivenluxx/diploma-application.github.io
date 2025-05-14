@@ -1,0 +1,31 @@
+.confirmation-container {
+  background-color: #0a0d2a; /* тёмный фон страницы */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 40px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.confirmation-message {
+  background-color: #322765; /* фиолетовый блок */
+  color: #ffffff;
+  padding: 20px 30px;
+  border-radius: 20px;
+  max-width: 800px;
+  text-align: left;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.confirmation-message a {
+  color: #a9bfff;
+  margin-left: 10px;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.confirmation-message a:hover {
+  color: #d0dfff;
+}
