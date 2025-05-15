@@ -44,13 +44,18 @@
     padding: 12px;
     margin-top: 5px;
     margin-bottom: 15px;
-    /* margin-left: -12px; Удалите этот хак, так как padding контейнера и box-sizing решают проблему */
     border: none;
     border-radius: 8px;
     background-color: #f1f5f9;
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
     box-sizing: border-box; /* Гарантирует, что padding и border включены в total width */
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.registration-input:focus {
+    border: 2px solid #7c63ff;
 }
 
 .registration-button {
@@ -71,6 +76,15 @@
 
 .registration-button:hover {
     background-color: #ddd;
+}
+
+/* Стили для сообщений об ошибках */
+.error-text {
+    color: #ff4d4f; /* Красный оттенок */
+    font-size: 0.85rem;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    font-family: 'Raleway', sans-serif;
 }
 
 /* Медиа-запросы для адаптации на маленьких экранах */
