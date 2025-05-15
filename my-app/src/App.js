@@ -5,6 +5,7 @@ import RegisterPage from './components/RegisterPage/RegisterPage';
 import PasswordRenewal from './components/PasswordRenewal/PasswordRenewal';
 import EmailPasswordRecovery from './components/E-mailPasswordRecovery/EmailPasswordRecovery';
 import EmailConfirmLetter from './components/E-mailConfirmLetter/EmailConfirmLetter';
+import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path ="/passwordrecovery" element = {<PasswordRenewal/>} />
         <Route path ="/emailpasswordrecovery" element = {<EmailPasswordRecovery/>} />
         <Route path ="/emailconfirmationletter" element = {<EmailConfirmLetter/>} />
+        <Route path = "/dashboard" element = {<Dashboard/>} />
       </Routes> 
     </div>
   );

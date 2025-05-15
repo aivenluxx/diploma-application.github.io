@@ -32,7 +32,7 @@ const LoginForm = () => {
       const result = await response.json();
 
       if (response.ok) {
-        navigate('/dashboard'); // или любую защищённую страницу
+        navigate('/dashboard'); 
       } else {
         setError(result.message || 'Login failed');
       }

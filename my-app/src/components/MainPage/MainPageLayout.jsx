@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaHome, FaClipboardList, FaUserCheck } from 'react-icons/fa';
 import { IoSpeedometerOutline } from 'react-icons/io5';
-import '../../styles/MainPage/MainPageLayout.css'; // Assuming you'll create a combined CSS
+import '../../styles/MainPage/MainPageLayout.css'; 
 
 const MainPageLayout = ({ children }) => {
   return (
