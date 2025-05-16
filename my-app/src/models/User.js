@@ -7,7 +7,9 @@ const userSchema = new mongoose.Schema({
   phone: { type: String, required: true },
   password: { type: String, required: true },
   isVerified: { type: Boolean, default: false },
-  verificationToken: { type: String }
+  verificationToken: { type: String },
+  resetToken: { type: String },
+  resetTokenExpiry: { type: Date },
 });
 
 

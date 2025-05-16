@@ -54,7 +54,7 @@ html {
 
 .toggle-buttons button {
   margin: 5px;
-  padding: 8px 12px;
+  padding: 16px 24px; /* было 8px 12px */
   cursor: pointer;
   background-color: #5a3a99;
   color: white;
@@ -62,6 +62,7 @@ html {
   border-radius: 5px;
   align-self: center; /* Центрировать кнопку */
   font-family: 'Raleway', sans-serif;
+  font-size: 18px; /* было не указано, поставил увеличенный */
 }
 
 /* Изменения для центрирования блока спидометра */
@@ -72,122 +73,100 @@ html {
   justify-content: center; /* Центрировать по вертикали */
   width: 100%;
   height: 100%;
-  gap: 30px; /* Отступ между элементами секции */
+  gap: 40px;
 }
 
 .speedometer-container {
   display: flex;
   flex-direction: column; /* Размещаем спидометр и кнопки единиц измерения вертикально */
   align-items: center; /* Центрировать по горизонтали */
-  gap: 20px; /* Расстояние между спидометром и кнопками единиц */
+  gap: 20px;
 }
 
 /* Контейнер для спидометра и кнопок единиц измерения */
 .speedometer-unit-wrapper {
   display: flex;
   align-items: center; /* Центрировать по вертикали */
-  gap: 40px; /* Расстояние между спидометром и кнопками единиц */
+  gap: 60px;
 }
 
 /* Стили дисплея спидометра */
 .speedometer-display {
-  width: 200px;
-  height: 200px;
+  width: 400px;
+  height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   overflow: hidden;
-  background-color: #444; /* Пример */
-  color: #fff; /* Пример */
-  font-size: 24px; /* Пример */
+  background-color: #341968;
+  color: #fff;
+  font-size: 48px;
 }
 
 .speedometer-display img {
-  max-width: 100%; /* Уменьшите изображение до 80% от ширины контейнера */
-  max-height: 100%; /* Уменьшите изображение до 80% от высоты контейнера */
-  object-fit: contain; /* Сохраняет пропорции изображения и помещает его внутрь контейнера */
-}
-
-.analog-speedometer {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.speedometer-needle {
-  position: absolute;
-  top: 50%;
-  left: 8%; /* Помещаем центр стрелки в центр */
-  width: 42%;
-  height: 2px;
-  background-color: red;
-  transform-origin: 100% 50%; /* Вращение вокруг правого края */
-  transform: rotate(280deg); /* Начальный поворот на 180 градусов */
-  transform: rotate(calc(280deg + 0deg)); /* Для динамического управления углом */
+  max-width: 100%;
+  max-height: 100%; 
+  object-fit: contain; 
 }
 
 .digital-speedometer p {
   font-family: 'Raleway', sans-serif;
-  font-size: 20px;
+  font-size: 40px;
 }
 
-/* Контейнер для кнопок выбора единиц измерения */
 .unit-selector-container {
   display: flex;
-  justify-content: center; /* Центрировать по горизонтали внутри контейнера */
+  justify-content: center; 
 }
 
-/* Стили селектора юнитов */
 .unit-selector {
   display: flex;
-  flex-direction: column; /* Разместить кнопки вертикально */
-  gap: 5px; /* Отступ между кнопками */
+  flex-direction: column; 
+  gap: 5px; 
 }
 
 .unit-selector button {
   margin: 0;
-  padding: 8px 12px;
+  padding: 16px 24px; 
   cursor: pointer;
   background-color: #5a3a99;
   color: white;
   border: none;
   border-radius: 5px;
   font-family: 'Raleway', sans-serif;
+  font-size: 32px; 
 }
 
-/* Стили управления скоростью */
 .speed-controls {
   display: flex;
-  flex-direction: column; /* Стекать элементы вертикально */
-  align-items: center; /* Центрировать по горизонтали */
+  flex-direction: column; 
+  align-items: center; 
   gap: 10px;
-  margin-top: 30px; /* Увеличим отступ сверху */
+  margin-top: 30px; 
   font-family: 'Raleway', sans-serif;
 }
 
-/* Стили кнопок управления скоростью */
 .speed-control-buttons {
   display: flex;
   gap: 10px;
 }
 
 .speed-control-buttons button {
-  padding: 8px 12px;
+  padding: 16px 24px; 
   cursor: pointer;
   background-color: #5a3a99;
   color: white;
   border: none;
   border-radius: 5px;
   font-family: 'Raleway', sans-serif;
+  font-size: 32px; 
 }
 
-/* Стили кнопки «Старт» */
 .start-button {
-  padding: 10px 20px;
+  padding: 20px 40px; 
   font-family: 'Raleway', sans-serif;
-  font-size: 16px;
+  font-size: 32px;
   background-color: #5a3a99;
   color: white;
   border: none;
