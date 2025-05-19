@@ -30,8 +30,10 @@ def description(message):
 def site(message):
     webbrowser.open('https://www.webpagetest.org/')
 
+
 @bot.callback_query_handler(func=lambda call: call.data == 'description')
 def callback_description(call):
     description(call.message)
 
 bot.polling(none_stop=True)
+

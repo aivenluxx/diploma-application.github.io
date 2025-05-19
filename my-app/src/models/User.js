@@ -2,15 +2,16 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  phone: { type: String, required: true },
-  password: { type: String, required: true },
+  name: String,
+  email: { type: String, unique: true },
+  phone: String,
+  password: String,
   isVerified: { type: Boolean, default: false },
-  verificationToken: { type: String },
-  resetToken: { type: String },
-  resetTokenExpiry: { type: Date },
-});
+  verificationToken: String,
+  resetToken: String,
+  resetTokenExpiry: Date,
+  activeTokens: [String],
+}, { timestamps: true });
 
 
 
@@ -24,7 +25,6 @@ userSchema.pre('save', async function (next) {
   } catch (err) {
     next(err);
   }
-  console.log('🔒 Hashing password...');
 });
 
 module.exports = mongoose.model('User', userSchema);
