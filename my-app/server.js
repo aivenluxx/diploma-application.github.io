@@ -130,7 +130,7 @@ app.get('/confirm/:token', async (req, res) => {
     await user.save();
 
     res.send(`
-      <html><head><meta http-equiv="refresh" content="5;url=http://localhost:3006/login" />
+      <html><head><meta http-equiv="refresh" content="5;url=https://speedster-4sd3.onrender.com/login" />
       <style>
         body { font-family: sans-serif; text-align: center; padding-top: 100px; background: #f4f4f4 }
         .spinner { margin: 20px auto; border: 4px solid #ccc; border-top-color: #2e86de; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite }
