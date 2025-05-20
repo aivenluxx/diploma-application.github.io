@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaClipboardList } from 'react-icons/fa';
+import { FaHome } from 'react-icons/fa';
 import { IoSpeedometerOutline } from 'react-icons/io5';
 import { FaTelegram } from "react-icons/fa6";
 import '../../styles/MainPage/MainPageLayout.css'; 
