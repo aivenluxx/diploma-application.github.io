@@ -108,7 +108,7 @@ app.post('/register', async (req, res) => {
       html: `
         <h3>Hello, ${name}!</h3>
         <p>Click the link to confirm your email:</p>
-        <a href="http://https://speedster-4sd3.onrender.com/confirm/${verificationToken}">Confirm Email</a>
+        <a href="https://speedster-4sd3.onrender.com/confirm/${verificationToken}">Confirm Email</a>
       `,
     });
 
@@ -147,7 +147,7 @@ app.get('/confirm/:token', async (req, res) => {
   }
 });
 
-// === Login ===
+
 app.post('/login', async (req, res) => {
   try {
     const { login, password } = req.body;
