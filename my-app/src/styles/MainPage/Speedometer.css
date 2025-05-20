@@ -173,3 +173,113 @@ html {
   border-radius: 5px;
   cursor: pointer;
 }
+
+
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .sidebar ul {
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+  }
+  
+  .sidebar li a {
+    padding: 5px;
+    font-size: 14px;
+  }
+  
+  .content {
+    padding: 10px;
+    justify-content: flex-start;
+  }
+  
+  .toggle-buttons {
+    margin-bottom: 15px;
+  }
+  
+  .toggle-buttons button {
+    padding: 12px 18px;
+    font-size: 16px;
+  }
+  
+  .speedometer-section {
+    gap: 20px;
+  }
+  
+  .speedometer-container {
+    gap: 15px;
+  }
+  
+  .speedometer-unit-wrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .speedometer-display {
+    width: 280px;
+    height: 280px;
+    font-size: 32px;
+  }
+  
+  .digital-speedometer p {
+    font-size: 32px;
+  }
+  
+  .unit-selector {
+    flex-direction: row;
+    gap: 5px;
+  }
+  
+  .unit-selector button {
+    padding: 12px 18px;
+    font-size: 16px;
+  }
+  
+  .speed-controls {
+    margin-top: 20px;
+  }
+  
+  .speed-control-buttons button {
+    padding: 12px 18px;
+    font-size: 16px;
+  }
+  
+  .start-button {
+    padding: 16px 32px;
+    font-size: 18px;
+  }
+}
+
+/* Дополнительная адаптация для очень маленьких экранов */
+@media (max-width: 480px) {
+  .speedometer-display {
+    width: 220px;
+    height: 220px;
+    font-size: 28px;
+  }
+  
+  .digital-speedometer p {
+    font-size: 28px;
+  }
+  
+  .toggle-buttons button,
+  .unit-selector button,
+  .speed-control-buttons button {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+  
+  .start-button {
+    padding: 14px 28px;
+    font-size: 16px;
+  }
+}
