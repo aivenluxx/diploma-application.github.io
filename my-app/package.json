@@ -25,14 +25,15 @@
     "web-vitals": "^2.1.4",
     "yarn": "^1.22.22"
   },
- "scripts": {
+"scripts": {
   "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
   "start:frontend": "npx cross-env PORT=3006 react-scripts start",
   "start:backend": "concurrently \"python ../telegram-bot/main.py\" \"node server.js\"",
-  "build": "npx react-scripts build",
+  "build": "react-scripts build",
+  "build:render": "npx react-scripts build",
   "test": "react-scripts test",
   "eject": "react-scripts eject"
-  },
+},
 
   "engines": {
     "node": "20.x"
