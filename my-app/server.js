@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
-const helmet = require('helmet');
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 require('dotenv').config();
 
@@ -17,27 +16,20 @@ const port = process.env.PORT || 3005;
 const JWT_SECRET = process.env.JWT_SECRET;
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
-const FRONTEND_URL = process.env.FRONTEND_URL || 'https://speedster-4sd3.onrender.com';
-const NODE_ENV = process.env.NODE_ENV || 'development';
 
-// Database connection
+
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => console.log('✅ Connected to MongoDB'))
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
-// Middleware
-app.use(helmet());
-app.use(cors({
-  origin: FRONTEND_URL,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-}));
+
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Authentication middleware
+
 const authenticateToken = async (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader?.split(' ')[1];
@@ -58,7 +50,7 @@ const authenticateToken = async (req, res, next) => {
   }
 };
 
-// Email transporter
+
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -67,7 +59,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Routes
+
 app.post('/api/alert', async (req, res) => {
   const { speed } = req.body;
   if (!speed) return res.status(400).json({ error: 'Speed is required' });
@@ -89,6 +81,7 @@ app.post('/api/alert', async (req, res) => {
   }
 });
 
+
 app.post('/register', async (req, res) => {
   try {
     const { name, email, phone, password } = req.body;
@@ -97,13 +90,12 @@ app.post('/register', async (req, res) => {
     if (existingUser) return res.status(400).json({ message: 'User already exists' });
 
     const verificationToken = crypto.randomBytes(32).toString('hex');
-    const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = new User({
       name,
       email,
       phone,
-      password: hashedPassword,
+      password, 
       verificationToken,
     });
 
@@ -116,9 +108,7 @@ app.post('/register', async (req, res) => {
       html: `
         <h3>Hello, ${name}!</h3>
         <p>Click the link to confirm your email:</p>
-        <a href="${FRONTEND_URL}/confirm/${verificationToken}">Confirm Email</a>
-        <p>If the button doesn't work, copy and paste this link in your browser:</p>
-        <p>${FRONTEND_URL}/confirm/${verificationToken}</p>
+        <a href="http://https://speedster-4sd3.onrender.com/confirm/${verificationToken}">Confirm Email</a>
       `,
     });
 
@@ -128,6 +118,7 @@ app.post('/register', async (req, res) => {
     res.status(500).json({ message: 'Registration error' });
   }
 });
+
 
 app.get('/confirm/:token', async (req, res) => {
   try {
@@ -139,36 +130,23 @@ app.get('/confirm/:token', async (req, res) => {
     await user.save();
 
     res.send(`
-      <html>
-        <head>
-          <meta http-equiv="refresh" content="5;url=${FRONTEND_URL}/login" />
-          <style>
-            body { font-family: sans-serif; text-align: center; padding-top: 100px; background: #f4f4f4 }
-            .spinner { margin: 20px auto; border: 4px solid #ccc; border-top-color: #2e86de; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite }
-            @keyframes spin { to { transform: rotate(360deg); } }
-          </style>
-        </head>
-        <body>
-          <h2>Email confirmed ✅</h2>
-          <p>Redirecting to login page...</p>
-          <div class="spinner"></div>
-          <p>If you are not redirected automatically, <a href="${FRONTEND_URL}/login">click here</a>.</p>
-        </body>
-      </html>
+      <html><head><meta http-equiv="refresh" content="5;url=https://speedster-4sd3.onrender.com/login" />
+      <style>
+        body { font-family: sans-serif; text-align: center; padding-top: 100px; background: #f4f4f4 }
+        .spinner { margin: 20px auto; border: 4px solid #ccc; border-top-color: #2e86de; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite }
+        @keyframes spin { to { transform: rotate(360deg); } }
+      </style></head><body>
+        <h2>Email confirmed ✅</h2>
+        <p>Redirecting to login...</p>
+        <div class="spinner"></div>
+      </body></html>
     `);
   } catch (err) {
     console.error(err);
-    res.status(500).send(`
-      <html>
-        <body>
-          <h2>Server Error</h2>
-          <p>Please try again later or contact support.</p>
-          <a href="${FRONTEND_URL}">Return to home page</a>
-        </body>
-      </html>
-    `);
+    res.status(500).send('Server error.');
   }
 });
+
 
 app.post('/login', async (req, res) => {
   try {
@@ -176,7 +154,7 @@ app.post('/login', async (req, res) => {
 
     const user = await User.findOne({ $or: [{ email: login }, { phone: login }] });
     if (!user) return res.status(404).json({ message: 'User not found' });
-    if (!user.isVerified) return res.status(403).json({ message: 'Email not verified. Please check your email.' });
+    if (!user.isVerified) return res.status(403).json({ message: 'Email not verified' });
 
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.status(401).json({ message: 'Incorrect password' });
@@ -187,21 +165,13 @@ app.post('/login', async (req, res) => {
     user.activeTokens.push(token);
     await user.save();
 
-    res.status(200).json({ 
-      message: 'Login successful', 
-      token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        phone: user.phone
-      }
-    });
+    res.status(200).json({ message: 'Login successful', token });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Login error' });
   }
 });
+
 
 app.post('/logout', authenticateToken, async (req, res) => {
   try {
@@ -214,15 +184,17 @@ app.post('/logout', authenticateToken, async (req, res) => {
   }
 });
 
+
 app.get('/api/profile', authenticateToken, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('-password -activeTokens -verificationToken');
+    const user = await User.findById(req.user.id).select('-password');
     if (!user) return res.status(404).json({ message: 'User not found' });
     res.status(200).json(user);
   } catch (err) {
     res.status(500).json({ message: 'Error fetching profile' });
   }
 });
+
 
 app.post('/forgot-password', async (req, res) => {
   const { email } = req.body;
@@ -231,46 +203,36 @@ app.post('/forgot-password', async (req, res) => {
 
   const token = crypto.randomBytes(32).toString('hex');
   user.resetToken = token;
-  user.resetTokenExpiry = Date.now() + 15 * 60 * 1000; // 15 minutes
+  user.resetTokenExpiry = Date.now() + 15 * 60 * 1000;
   await user.save();
 
-  const resetLink = `${FRONTEND_URL}/reset-password/${token}`;
+  const resetLink = `https://speedster-4sd3.onrender.com/reset-password/${token}`;
 
   try {
     await transporter.sendMail({
       from: '"Speedster" <noreplysp33dster@gmail.com>',
       to: user.email,
       subject: 'Reset your password',
-      html: `
-        <p>Hello ${user.name},</p>
-        <p>Click the link to reset your password (valid for 15 minutes):</p>
-        <a href="${resetLink}">Reset Password</a>
-        <p>Or copy and paste this link in your browser:</p>
-        <p>${resetLink}</p>
-      `,
+      html: `<p>Hello ${user.name},</p><p>Reset link (valid 15 min): <a href="${resetLink}">${resetLink}</a></p>`,
     });
 
-    res.status(200).json({ message: 'Reset link sent to your email' });
+    res.status(200).json({ message: 'Reset link sent' });
   } catch (err) {
     console.error('Email error:', err);
     res.status(500).json({ message: 'Failed to send reset email' });
   }
 });
 
+
 app.post('/reset-password/:token', async (req, res) => {
   const { token } = req.params;
   const { password } = req.body;
 
   try {
-    const user = await User.findOne({ 
-      resetToken: token, 
-      resetTokenExpiry: { $gt: Date.now() } 
-    });
-    
+    const user = await User.findOne({ resetToken: token, resetTokenExpiry: { $gt: Date.now() } });
     if (!user) return res.status(400).json({ message: 'Invalid or expired token' });
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    user.password = hashedPassword;
+    user.password = password; 
     user.resetToken = undefined;
     user.resetTokenExpiry = undefined;
     await user.save();
@@ -282,14 +244,6 @@ app.post('/reset-password/:token', async (req, res) => {
   }
 });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: 'Something broke!' });
-});
-
-// Server start
 app.listen(port, () => {
-  console.log(`🚀 Server running in ${NODE_ENV} mode on port ${port}`);
-  console.log(`🌐 Frontend URL: ${FRONTEND_URL}`);
+  console.log(`🚀 Server running at http://localhost:${port}`);
 });
