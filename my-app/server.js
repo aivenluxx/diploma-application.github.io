@@ -108,7 +108,7 @@ app.post('/register', async (req, res) => {
       html: `
         <h3>Hello, ${name}!</h3>
         <p>Click the link to confirm your email:</p>
-        <a href="http://localhost:${port}/confirm/${verificationToken}">Confirm Email</a>
+        <a href="http://https://speedster-4sd3.onrender.com/confirm/${verificationToken}">Confirm Email</a>
       `,
     });
 
@@ -206,7 +206,7 @@ app.post('/forgot-password', async (req, res) => {
   user.resetTokenExpiry = Date.now() + 15 * 60 * 1000;
   await user.save();
 
-  const resetLink = `http://localhost:3006/reset-password/${token}`;
+  const resetLink = `https://speedster-4sd3.onrender.com/reset-password/${token}`;
 
   try {
     await transporter.sendMail({
