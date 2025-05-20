@@ -11,7 +11,10 @@
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
+    "express": "^5.1.0",
+    "fetch": "^1.1.0",
     "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.15.0",
     "nodemailer": "^7.0.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -23,16 +26,20 @@
     "yarn": "^1.22.22"
   },
   "scripts": {
-  "start": "react-scripts start",
+  "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+  "start:frontend": "npx cross-env PORT=3006 react-scripts start",
+  "start:backend": "concurrently \"python ../telegram-bot/main.py\" \"node server.js\"",
   "build": "react-scripts build",
   "test": "react-scripts test",
   "eject": "react-scripts eject"
   },
+
   "engines": {
     "node": "20.x"
   },
   "devDependencies": {
-    "concurrently": "^8.0.0"
+    "concurrently": "^8.2.2",
+    "crossenv": "^0.0.2-security"
   },
   "eslintConfig": {
     "extends": [

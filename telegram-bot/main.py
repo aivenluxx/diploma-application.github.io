@@ -22,13 +22,13 @@ def description(message):
         'Speedster is a bot whose main goal is to help drivers control their speed while driving through city streets. All you need is to be registered on the main web application Speedster.'
     )
     markup = types.InlineKeyboardMarkup()
-    markup.add(types.InlineKeyboardButton('Go on Speedster website', url='https://www.webpagetest.org/'))
+    markup.add(types.InlineKeyboardButton('Go on Speedster website', url='https://diploma-application-github-io.onrender.com/'))
     markup.add(types.InlineKeyboardButton('Description', callback_data='description'))
     bot.send_message(message.chat.id, "Choose an option:", reply_markup=markup)
 
 @bot.message_handler(commands=['site', 'website'])
 def site(message):
-    webbrowser.open('https://www.webpagetest.org/')
+    webbrowser.open('https://diploma-application-github-io.onrender.com/')
 
 
 @bot.callback_query_handler(func=lambda call: call.data == 'description')
