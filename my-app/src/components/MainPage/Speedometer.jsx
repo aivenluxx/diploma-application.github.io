@@ -10,11 +10,11 @@ const Speedometer = () => {
   const getSpeedInUnit = () => {
     switch (unit) {
       case 'mps':
-        return (speed / 3.6).toFixed(2); // km/h -> m/s
+        return Math.round(speed / 3.6); // km/h -> m/s (целое число)
       case 'mph':
-        return (speed * 0.621371).toFixed(2); // km/h -> mph
+        return Math.round(speed * 0.621371); // km/h -> mph (целое число)
       default:
-        return speed.toFixed(2);
+        return Math.round(speed); // целое число для km/h
     }
   };
 
@@ -69,7 +69,6 @@ const Speedometer = () => {
         prevPos.current = { latitude, longitude, time: currentTime };
       },
       (error) => {
-        // Игнорируем таймауты, чтобы не показывать ошибку, если позиция не обновляется
         if (error.code === error.TIMEOUT) {
           console.warn('Geolocation timeout - position did not change');
           return;
@@ -77,7 +76,11 @@ const Speedometer = () => {
         console.error('Error getting position:', error);
         alert('Ошибка получения геолокации');
       },
-      { enableHighAccuracy: true, maximumAge: 0, timeout: 3000 }
+      { 
+        enableHighAccuracy: true, 
+        maximumAge: 0, 
+        timeout: 1000 // уменьшил таймаут до 1 секунды для более частых обновлений
+      }
     );
   };
 
