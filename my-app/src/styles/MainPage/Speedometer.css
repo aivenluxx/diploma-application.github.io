@@ -1,35 +1,41 @@
+/* Основные стили остаются без изменений */
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap');
 
-body,
-html {
+body, html {
   height: 100%;
   margin: 0;
   background-color: #0a043c;
   color: #fff;
+  font-family: 'Raleway', sans-serif;
 }
 
 .app-container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
+  flex-direction: column; /* По умолчанию мобильный вид */
 }
 
 .sidebar {
-  width: 200px;
   background-color: #341968;
-  padding: 20px;
+  padding: 15px;
   color: #fff;
 }
 
 .sidebar ul {
   list-style-type: none;
   padding: 0;
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  margin: 0;
 }
 
 .sidebar li a {
   color: #fff;
   text-decoration: none;
-  display: block;
-  padding: 10px 0;
+  white-space: nowrap;
+  padding: 8px 12px;
+  font-size: 14px;
 }
 
 .content {
@@ -37,63 +43,40 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
+  padding: 15px;
+  box-sizing: border-box;
 }
 
-.content header {
-  margin-bottom: 20px;
-}
-
-/* Стили кнопок переключения (Analog/Digital) */
-.toggle-buttons {
-  display: flex;
-  justify-content: center; /* Центрировать кнопку */
-  margin-bottom: 20px; /* Отступ снизу от кнопки */
-}
-
-.toggle-buttons button {
-  margin: 5px;
-  padding: 16px 24px; /* было 8px 12px */
-  cursor: pointer;
-  background-color: #5a3a99;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  align-self: center; /* Центрировать кнопку */
-  font-family: 'Raleway', sans-serif;
-  font-size: 18px; /* было не указано, поставил увеличенный */
-}
-
-/* Изменения для центрирования блока спидометра */
+/* Адаптация спидометра */
 .speedometer-section {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Центрировать по горизонтали */
-  justify-content: center; /* Центрировать по вертикали */
+  align-items: center;
   width: 100%;
-  height: 100%;
-  gap: 40px;
+  gap: 20px;
+  margin-top: 20px;
 }
 
 .speedometer-container {
   display: flex;
-  flex-direction: column; /* Размещаем спидометр и кнопки единиц измерения вертикально */
-  align-items: center; /* Центрировать по горизонтали */
-  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
 }
 
-/* Контейнер для спидометра и кнопок единиц измерения */
 .speedometer-unit-wrapper {
   display: flex;
-  align-items: center; /* Центрировать по вертикали */
-  gap: 60px;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
 }
 
-/* Стили дисплея спидометра */
 .speedometer-display {
-  width: 400px;
-  height: 400px;
+  width: 100%;
+  max-width: 280px;
+  height: 280px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,185 +84,86 @@ html {
   overflow: hidden;
   background-color: #341968;
   color: #fff;
-  font-size: 48px;
+  font-size: 32px;
 }
 
-.speedometer-display img {
-  max-width: 100%;
-  max-height: 100%; 
-  object-fit: contain; 
-}
-
-.digital-speedometer p {
-  font-family: 'Raleway', sans-serif;
-  font-size: 40px;
-}
-
-.unit-selector-container {
+/* Адаптация кнопок */
+.toggle-buttons, .unit-selector, .speed-control-buttons {
   display: flex;
-  justify-content: center; 
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
 }
 
-.unit-selector {
-  display: flex;
-  flex-direction: column; 
-  gap: 5px; 
-}
-
-.unit-selector button {
-  margin: 0;
-  padding: 16px 24px; 
+.toggle-buttons button, 
+.unit-selector button, 
+.speed-control-buttons button,
+.start-button {
+  padding: 12px 18px;
   cursor: pointer;
   background-color: #5a3a99;
   color: white;
   border: none;
   border-radius: 5px;
   font-family: 'Raleway', sans-serif;
-  font-size: 32px; 
-}
-
-.speed-controls {
-  display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  gap: 10px;
-  margin-top: 30px; 
-  font-family: 'Raleway', sans-serif;
-}
-
-.speed-control-buttons {
-  display: flex;
-  gap: 10px;
-}
-
-.speed-control-buttons button {
-  padding: 16px 24px; 
-  cursor: pointer;
-  background-color: #5a3a99;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-family: 'Raleway', sans-serif;
-  font-size: 32px; 
+  font-size: 16px;
+  min-width: 120px;
 }
 
 .start-button {
-  padding: 20px 40px; 
-  font-family: 'Raleway', sans-serif;
-  font-size: 32px;
-  background-color: #5a3a99;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  padding: 16px 24px;
+  font-size: 18px;
+  margin-top: 15px;
 }
 
-
-@media (max-width: 768px) {
+/* Десктопная версия (только для экранов шире 768px) */
+@media (min-width: 768px) {
   .app-container {
-    flex-direction: column;
+    flex-direction: row;
   }
   
   .sidebar {
-    width: 100%;
-    padding: 10px;
-    text-align: center;
+    width: 200px;
+    padding: 20px;
   }
   
   .sidebar ul {
-    display: flex;
-    justify-content: space-around;
-    margin: 0;
+    flex-direction: column;
+    gap: 0;
   }
   
   .sidebar li a {
-    padding: 5px;
-    font-size: 14px;
-  }
-  
-  .content {
-    padding: 10px;
-    justify-content: flex-start;
-  }
-  
-  .toggle-buttons {
-    margin-bottom: 15px;
-  }
-  
-  .toggle-buttons button {
-    padding: 12px 18px;
+    padding: 10px 0;
     font-size: 16px;
-  }
-  
-  .speedometer-section {
-    gap: 20px;
-  }
-  
-  .speedometer-container {
-    gap: 15px;
   }
   
   .speedometer-unit-wrapper {
-    flex-direction: column;
-    gap: 20px;
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px;
   }
   
   .speedometer-display {
-    width: 280px;
-    height: 280px;
-    font-size: 32px;
-  }
-  
-  .digital-speedometer p {
-    font-size: 32px;
+    max-width: 400px;
+    height: 400px;
+    font-size: 48px;
   }
   
   .unit-selector {
-    flex-direction: row;
-    gap: 5px;
+    flex-direction: column;
   }
   
-  .unit-selector button {
-    padding: 12px 18px;
-    font-size: 16px;
-  }
-  
-  .speed-controls {
-    margin-top: 20px;
-  }
-  
-  .speed-control-buttons button {
-    padding: 12px 18px;
-    font-size: 16px;
-  }
-  
+  .toggle-buttons button, 
+  .unit-selector button, 
+  .speed-control-buttons button,
   .start-button {
-    padding: 16px 32px;
+    padding: 16px 24px;
     font-size: 18px;
   }
-}
-
-/* Дополнительная адаптация для очень маленьких экранов */
-@media (max-width: 480px) {
-  .speedometer-display {
-    width: 220px;
-    height: 220px;
-    font-size: 28px;
-  }
-  
-  .digital-speedometer p {
-    font-size: 28px;
-  }
-  
-  .toggle-buttons button,
-  .unit-selector button,
-  .speed-control-buttons button {
-    padding: 10px 15px;
-    font-size: 14px;
-  }
   
   .start-button {
-    padding: 14px 28px;
-    font-size: 16px;
+    font-size: 32px;
+    padding: 20px 40px;
   }
 }
