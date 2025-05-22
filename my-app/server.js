@@ -17,18 +17,15 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
-
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => console.log('✅ Connected to MongoDB'))
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
-
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
 
 const authenticateToken = async (req, res, next) => {
   const authHeader = req.headers['authorization'];
@@ -50,7 +47,6 @@ const authenticateToken = async (req, res, next) => {
   }
 };
 
-
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -59,7 +55,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-
+// 🚨 Telegram alert
 app.post('/api/alert', async (req, res) => {
   const { speed } = req.body;
   if (!speed) return res.status(400).json({ error: 'Speed is required' });
@@ -81,7 +77,7 @@ app.post('/api/alert', async (req, res) => {
   }
 });
 
-
+// 📝 Register
 app.post('/register', async (req, res) => {
   try {
     const { name, email, phone, password } = req.body;
@@ -95,7 +91,7 @@ app.post('/register', async (req, res) => {
       name,
       email,
       phone,
-      password, 
+      password,
       verificationToken,
     });
 
@@ -108,7 +104,7 @@ app.post('/register', async (req, res) => {
       html: `
         <h3>Hello, ${name}!</h3>
         <p>Click the link to confirm your email:</p>
-        <a href="http://https://speedster-4sd3.onrender.com/confirm/${verificationToken}">Confirm Email</a>
+        <a href="http://localhost:3005/confirm/${verificationToken}">Confirm Email</a>
       `,
     });
 
@@ -119,35 +115,24 @@ app.post('/register', async (req, res) => {
   }
 });
 
-
+// ✅ Confirm email
 app.get('/confirm/:token', async (req, res) => {
   try {
     const user = await User.findOne({ verificationToken: req.params.token });
-    if (!user) return res.status(400).send('Invalid or expired token.');
+    if (!user) return res.redirect('http://localhost:3006/invalid-token');
 
     user.isVerified = true;
     user.verificationToken = undefined;
     await user.save();
 
-    res.send(`
-      <html><head><meta http-equiv="refresh" content="5;url=https://speedster-4sd3.onrender.com/login" />
-      <style>
-        body { font-family: sans-serif; text-align: center; padding-top: 100px; background: #f4f4f4 }
-        .spinner { margin: 20px auto; border: 4px solid #ccc; border-top-color: #2e86de; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite }
-        @keyframes spin { to { transform: rotate(360deg); } }
-      </style></head><body>
-        <h2>Email confirmed ✅</h2>
-        <p>Redirecting to login...</p>
-        <div class="spinner"></div>
-      </body></html>
-    `);
+    res.redirect('http://localhost:3006/email-confirmed');
   } catch (err) {
     console.error(err);
-    res.status(500).send('Server error.');
+    res.redirect('http://localhost:3006/error');
   }
 });
 
-
+// 🔐 Login
 app.post('/login', async (req, res) => {
   try {
     const { login, password } = req.body;
@@ -172,7 +157,7 @@ app.post('/login', async (req, res) => {
   }
 });
 
-
+// 🚪 Logout
 app.post('/logout', authenticateToken, async (req, res) => {
   try {
     await User.findByIdAndUpdate(req.user.id, {
@@ -184,7 +169,7 @@ app.post('/logout', authenticateToken, async (req, res) => {
   }
 });
 
-
+// 👤 Get profile
 app.get('/api/profile', authenticateToken, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
@@ -195,7 +180,7 @@ app.get('/api/profile', authenticateToken, async (req, res) => {
   }
 });
 
-
+// 🔄 Forgot password
 app.post('/forgot-password', async (req, res) => {
   const { email } = req.body;
   const user = await User.findOne({ email });
@@ -206,7 +191,7 @@ app.post('/forgot-password', async (req, res) => {
   user.resetTokenExpiry = Date.now() + 15 * 60 * 1000;
   await user.save();
 
-  const resetLink = `https://speedster-4sd3.onrender.com/reset-password/${token}`;
+  const resetLink = `http://localhost:3005/reset-password/${token}`;
 
   try {
     await transporter.sendMail({
@@ -223,7 +208,13 @@ app.post('/forgot-password', async (req, res) => {
   }
 });
 
+// ✅ Redirect to frontend reset page
+app.get('/reset-password/:token', (req, res) => {
+  const { token } = req.params;
+  res.redirect(`http://localhost:3006/reset-password/${token}`);
+});
 
+// ✅ Reset password logic
 app.post('/reset-password/:token', async (req, res) => {
   const { token } = req.params;
   const { password } = req.body;
@@ -232,7 +223,7 @@ app.post('/reset-password/:token', async (req, res) => {
     const user = await User.findOne({ resetToken: token, resetTokenExpiry: { $gt: Date.now() } });
     if (!user) return res.status(400).json({ message: 'Invalid or expired token' });
 
-    user.password = password; 
+    user.password = password;
     user.resetToken = undefined;
     user.resetTokenExpiry = undefined;
     await user.save();
